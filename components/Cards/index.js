@@ -22,39 +22,51 @@ axios
     .get(`https://lambda-times-backend.herokuapp.com/articles`)
     .then( response => {
         console.log(response);
-        let topicArray = response.data.articles;
-        console.log(Array.from(topicArray));
+        let dataArray = response.data.articles;
+        console.log(dataArray);
+        topicCreator(dataArray);
+        // dataArray.forEach( object => {
+        //     topicCreator(object);
+        // })
     })
     .catch( err => {
         console.log("Error:", err);
     });
 
-function articleCreator (topic) {
-    //Create Elements
-    const card = document.createElement('div');
-    const headline = document.createElement('div');
-    const authorDiv = document.createElement('div');
-    const imgContainer = document.createElement('div');
-    const img = document.createElement('img');
-    const authorName = document.createElement('span');
+function topicCreator (topic) {
+    topic.forEach(topic => {
+        let cardContainer = document.querySelector('.cards-container');
+        cardContainer.appendChild(cardCreator(topic));
 
-    //Create Classes
-    card.classList.add('card');
-    headline.classList.add('headline');
-    authorDiv.classList.add('author');
-    imgContainer.classList.add('img-container');
+        function cardCreator (item) {
+        
+            //Create Elements
+            const card = document.createElement('div');
+            const headline = document.createElement('div');
+            const authorDiv = document.createElement('div');
+            const imgContainer = document.createElement('div');
+            const img = document.createElement('img');
+            const authorName = document.createElement('span');
 
-    //Create Content
-    headline.textContent = topic.headline;
-    img.src = topic.authorPhoto;
-    authorName.textContent = `By ${topic.authorName}`
+            //Create Classes
+            card.classList.add('card');
+            headline.classList.add('headline');
+            authorDiv.classList.add('author');
+            imgContainer.classList.add('img-container');
 
-    //Create Structure
-    card.appendChild(headline);
-    card.appendChild(authorDiv);
-        authorDiv.appendChild(imgContainer);
-            imgContainer.appendChild(img);
-        authorDiv.appendChild(authorName);
+            //Create Content
+            headline.textContent = item.headline;
+            img.src = item.authorPhoto;
+            authorName.textContent = `By ${item.authorName}`
 
-    return card;
+            //Create Structure
+            card.appendChild(headline);
+            card.appendChild(authorDiv);
+                authorDiv.appendChild(imgContainer);
+                    imgContainer.appendChild(img);
+                authorDiv.appendChild(authorName);
+
+            return card;
+        }
+    })
 }
