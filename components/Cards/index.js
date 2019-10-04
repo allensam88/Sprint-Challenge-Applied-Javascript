@@ -33,8 +33,8 @@ axios
         console.log("Error:", err);
     });
 
-function topicCreator (topic) {
-    topic.forEach(topic => {
+function topicCreator (object) {
+    object.forEach(topic => {
         let cardContainer = document.querySelector('.cards-container');
         cardContainer.appendChild(cardCreator(topic));
 

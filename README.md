@@ -30,13 +30,23 @@ Edit this document to include your answers after each question. Make sure to lea
 
 1. What is the DOM?
 
+The document object model is basically the browser page that can be manipulated dynamically using JavaScript.  There are object nodes on the DOM tree which can be changed based on user interaction.  However, the DOM is not HTML, CSS, nor JavaScript, but just an interface platform in which these items can be displayed.  When JavaScript is used to manipulate an object on the DOM, it is only stored in memory when the browser is open.  If the page is refreshed or closed, then the dynamic operations from JavaScript will be reset to the initial html & css code.
+
 2. What is an event?
+
+An event is a user action that occurs as the user interacts dynamically with the page.  Some examples include clicking on an object, typing in an input or form field, trying to copy/paste objects onto the clipboard, scrolling or resizing the browser window, etc…
 
 3. What is an event listener?
 
+An event listener is the JavaScript method used to ‘listen’ for a specific event action that takes place on a specific object.  Clicking on a button for example will trigger the event listener to take some desired action and return a function operation.
+
 4. Why would we convert a NodeList into an Array?
 
+Using the querySelectorAll will produce an array-like object called a node list (unlike the getElementsByClassName which produces an HTML collection, which has no array-like properties, except .length).  With a NodeList, the ‘.forEach’ method can be used with this data, but no other array methods.  By using ‘.from’, we can transform the data into an array and access all of the other array methods such as ‘.map’, ‘.reduce’, ‘.filter’, etc.
+
 5. What is a component?
+
+A component is a smaller piece of a larger assembly.  In JavaScript, smaller elements or operations can be broken down into components to make the code D.R.Y. and more efficient.  Many operations can be created or duplicated utilizing the same component operation routine.
 
 ### Git Set up
 
