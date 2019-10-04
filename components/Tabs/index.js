@@ -30,6 +30,5 @@ function tabCreator (array){
         topics.appendChild(tab);
 
         return tab;
-    });
-    
+    }); 
 }

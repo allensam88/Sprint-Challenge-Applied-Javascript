@@ -22,51 +22,47 @@ axios
     .get(`https://lambda-times-backend.herokuapp.com/articles`)
     .then( response => {
         console.log(response);
-        let dataArray = response.data.articles;
-        console.log(dataArray);
-        topicCreator(dataArray);
-        // dataArray.forEach( object => {
-        //     topicCreator(object);
-        // })
+            const articles = response.data.articles;
+            const topicArray = Object.keys(articles);
+            console.log(topicArray);
+            const cardsContainer = document.querySelector('.cards-container');
+            topicArray.forEach( item => {
+                let topics = articles[item];
+                topics.forEach( article => {
+                    cardsContainer.appendChild(cardCreator(article)); 
+                })
+            })
     })
     .catch( err => {
         console.log("Error:", err);
     });
 
-function topicCreator (object) {
-    object.forEach(topic => {
-        let cardContainer = document.querySelector('.cards-container');
-        cardContainer.appendChild(cardCreator(topic));
+function cardCreator (array) {
+    //Create Elements
+    const card = document.createElement('div');
+    const headline = document.createElement('div');
+    const authorDiv = document.createElement('div');
+    const imgContainer = document.createElement('div');
+    const img = document.createElement('img');
+    const authorName = document.createElement('span');
 
-        function cardCreator (item) {
-        
-            //Create Elements
-            const card = document.createElement('div');
-            const headline = document.createElement('div');
-            const authorDiv = document.createElement('div');
-            const imgContainer = document.createElement('div');
-            const img = document.createElement('img');
-            const authorName = document.createElement('span');
+    //Create Classes
+    card.classList.add('card');
+    headline.classList.add('headline');
+    authorDiv.classList.add('author');
+    imgContainer.classList.add('img-container');
 
-            //Create Classes
-            card.classList.add('card');
-            headline.classList.add('headline');
-            authorDiv.classList.add('author');
-            imgContainer.classList.add('img-container');
+    //Create Content
+    headline.textContent = array.headline;
+    img.src = array.authorPhoto;
+    authorName.textContent = `By ${array.authorName}`
 
-            //Create Content
-            headline.textContent = item.headline;
-            img.src = item.authorPhoto;
-            authorName.textContent = `By ${item.authorName}`
+    //Create Structure
+    card.appendChild(headline);
+    card.appendChild(authorDiv);
+        authorDiv.appendChild(imgContainer);
+            imgContainer.appendChild(img);
+        authorDiv.appendChild(authorName);
 
-            //Create Structure
-            card.appendChild(headline);
-            card.appendChild(authorDiv);
-                authorDiv.appendChild(imgContainer);
-                    imgContainer.appendChild(img);
-                authorDiv.appendChild(authorName);
-
-            return card;
-        }
-    })
+    return card;
 }
